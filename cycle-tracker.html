@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Je maîtrise mon Cycle</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    
+    <style>
+        :root {
+            --primary-pink: #FFB6C1;
+            --soft-peach: #FFD4BA;
+            --lavender: #E6D9F2;
+            --pastel-blue: #B8DCE8;
+            --soft-purple: #D4BBDD;
+            --cream: #FFF8F0;
+            --dark-text: #5A4A6A;
+            --light-shadow: 0 8px 24px rgba(180, 140, 180, 0.15);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background: linear-gradient(135deg, var(--cream) 0%, #FFF5F8 50%, var(--lavender) 100%);
+            background-attachment: fixed;
+            color: var(--dark-text);
+            min-height: 100vh;
+            max-height: 100vh;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* Animated background elements */
+        body::before {
+            content: '';
+            position: fixed;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(255, 182, 193, 0.1) 0%, transparent 70%);
+            animation: float 20s ease-in-out infinite;
+            z-index: 0;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            50% { transform: translate(-20px, -20px) rotate(5deg); }
+        }
+        
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            width: 90%;
+            max-height: 95vh;
+            overflow-y: auto;
+            padding: 2rem 1rem;
+        }
+        
+        .container::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        .container::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+        }
+        
+        .container::-webkit-scrollbar-thumb {
+            background: var(--primary-pink);
+            border-radius: 10px;
+        }
+        
+        .container::-webkit-scrollbar-thumb:hover {
+            background: var(--soft-purple);
+        }
+        
+        /* Header with blue left border */
+        .header-card {
+            background: linear-gradient(135deg, #ffffff 0%, #FFF8FC 100%);
+            border-radius: 25px;
+            padding: 1.2rem 2rem;
+            box-shadow: var(--light-shadow);
+            border-left: 8px solid var(--pastel-blue);
+            margin: 0 0 1.5rem 0;
+            position: relative;
+            overflow: hidden;
+            animation: slideInDown 0.8s ease-out;
+        }
+        
+        .header-card::after {
+            content: '🌸';
+            position: absolute;
+            right: 2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 3rem;
+            opacity: 0.2;
+        }
+        
+        @keyframes slideInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .header-card h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--dark-text);
+            margin: 0;
+            letter-spacing: 0.5px;
+        }
+        
+        /* Presentation card */
+        .presentation-card {
+            background: linear-gradient(135deg, #ffffff 0%, #FFF5FB 100%);
+            border-radius: 20px;
+            padding: 1.5rem;
+            box-shadow: var(--light-shadow);
+            margin-bottom: 1.5rem;
+            text-align: center;
+            border: 3px solid rgba(255, 182, 193, 0.2);
+            animation: fadeInUp 1s ease-out 0.2s backwards;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .presentation-card h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            color: var(--dark-text);
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        
+        .presentation-card p {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: #6B5B7B;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        /* Feature section */
+        .feature-section {
+            margin-bottom: 1.5rem;
+            animation: fadeInUp 1s ease-out 0.4s backwards;
+        }
+        
+        .feature-card {
+            background: white;
+            border-radius: 20px;
+            padding: 1.2rem;
+            height: 100%;
+            box-shadow: var(--light-shadow);
+            transition: all 0.4s ease;
+            border: 2px solid transparent;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(180, 140, 180, 0.25);
+            border-color: var(--primary-pink);
+        }
+        
+        .feature-img {
+            width: 100%;
+            height: 180px;
+            border-radius: 15px;
+            background: linear-gradient(135deg, var(--lavender) 0%, var(--soft-peach) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .feature-img::before {
+            
+            font-size: 5rem;
+            opacity: 0.3;
+            animation: pulse 3s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.3; }
+            50% { transform: scale(1.1); opacity: 0.5; }
+        }
+        
+        .feature-description {
+            background: linear-gradient(135deg, #FFFBFE 0%, #FFF8FC 100%);
+            border-radius: 15px;
+            padding: 1.5rem;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            border-left: 5px solid var(--soft-purple);
+        }
+        
+        .feature-description h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            color: var(--dark-text);
+            margin-bottom: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .feature-description p {
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: #6B5B7B;
+        }
+        
+        /* Input section */
+        .input-section {
+            background: white;
+            border-radius: 20px;
+            padding: 1.5rem;
+            box-shadow: var(--light-shadow);
+            margin-bottom: 1.5rem;
+            border-top: 5px solid var(--pastel-blue);
+            animation: fadeInUp 1s ease-out 0.6s backwards;
+        }
+        
+        .input-section label {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--dark-text);
+            margin-bottom: 0.8rem;
+            display: block;
+        }
+        
+        .form-control {
+            border-radius: 15px;
+            border: 2px solid var(--lavender);
+            padding: 0.6rem 1rem;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            font-family: 'Quicksand', sans-serif;
+        }
+        
+        .form-control:focus {
+            border-color: var(--primary-pink);
+            box-shadow: 0 0 0 0.25rem rgba(255, 182, 193, 0.25);
+        }
+        
+        .btn-validate {
+            background: linear-gradient(135deg, var(--primary-pink) 0%, var(--soft-purple) 100%);
+            color: white;
+            border: none;
+            border-radius: 18px;
+            padding: 0.8rem 2.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.4s ease;
+            box-shadow: 0 6px 20px rgba(255, 182, 193, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-validate::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+        
+        .btn-validate:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+        
+        .btn-validate:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(255, 182, 193, 0.5);
+        }
+        
+        /* Result Modal */
+        .result-modal-content {
+            background: linear-gradient(135deg, #ffffff 0%, #FFF8FC 100%);
+            border-radius: 25px;
+            border: 3px solid var(--primary-pink);
+            box-shadow: 0 20px 60px rgba(180, 140, 180, 0.6);
+        }
+        
+        .modal-header .btn-close {
+            background-color: var(--primary-pink);
+            opacity: 0.8;
+            border-radius: 50%;
+            padding: 0.5rem;
+        }
+        
+        .modal-header .btn-close:hover {
+            opacity: 1;
+            transform: rotate(90deg);
+            transition: all 0.3s ease;
+        }
+        
+        .modal-body {
+            padding: 1.5rem 2rem 2rem 2rem;
+        }
+        
+        /* Remove default Bootstrap modal backdrop */
+        .modal-backdrop {
+            display: none !important;
+        }
+        
+        .alert-box {
+            background: linear-gradient(135deg, #FFF0F3 0%, #FFE8ED 100%);
+            border-left: 5px solid #FF6B9D;
+            border-radius: 12px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .alert-box i {
+            font-size: 1.5rem;
+            color: #FF6B9D;
+            margin-right: 0.8rem;
+        }
+        
+        .alert-box .alert-text {
+            font-size: 0.95rem;
+            color: #8B4A6A;
+            font-weight: 600;
+        }
+        
+        .info-box {
+            background: linear-gradient(135deg, #F0F8FF 0%, #E8F4FF 100%);
+            border-radius: 15px;
+            padding: 1.2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .info-box h4 {
+            color: var(--dark-text);
+            font-weight: 600;
+            margin-bottom: 0.4rem;
+            font-size: 0.95rem;
+        }
+        
+        .info-box p {
+            color: #5A7A9A;
+            margin: 0;
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+        
+        .period-dates {
+            background: linear-gradient(135deg, var(--lavender) 0%, var(--soft-peach) 100%);
+            border-radius: 15px;
+            padding: 1.2rem;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+        
+        .period-dates h4 {
+            color: var(--dark-text);
+            margin-bottom: 0.7rem;
+            font-weight: 700;
+            font-size: 0.95rem;
+        }
+        
+        .period-dates .dates {
+            font-size: 1.1rem;
+            color: #6B4A8A;
+            font-weight: 700;
+        }
+        
+        .btn-advice {
+            background: linear-gradient(135deg, var(--pastel-blue) 0%, var(--lavender) 100%);
+            color: white;
+            border: none;
+            border-radius: 18px;
+            padding: 0.8rem 2rem;
+            font-size: 0.95rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 20px rgba(184, 220, 232, 0.4);
+            display: block;
+            margin: 0 auto;
+        }
+        
+        .btn-advice:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(184, 220, 232, 0.5);
+            color: white;
+        }
+        
+        .flower-decoration {
+            position: fixed;
+            font-size: 3rem;
+            opacity: 0.1;
+            animation: floatFlower 15s ease-in-out infinite;
+            z-index: 0;
+        }
+        
+        @keyframes floatFlower {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-30px) rotate(10deg); }
+        }
+        
+        .flower-1 { top: 10%; left: 5%; animation-delay: 0s; }
+        .flower-2 { top: 60%; right: 8%; animation-delay: 3s; }
+        .flower-3 { bottom: 15%; left: 10%; animation-delay: 6s; }
+        
+        @media (max-width: 768px) {
+            .header-card h1 {
+                font-size: 1.8rem;
+            }
+            
+            .header-card {
+                padding: 1.5rem 2rem;
+            }
+            
+            .presentation-card,
+            .input-section {
+                padding: 2rem;
+            }
+            
+            .result-banner {
+                padding: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="flower-decoration flower-1">🌸</div>
+    <div class="flower-decoration flower-2">🌺</div>
+    <div class="flower-decoration flower-3">🌼</div>
+    
+    <div class="container">
+        <div class="header-card">
+            <h1>Je maîtrise mon Cycle</h1>
+        </div>
+        
+        <div class="presentation-card">
+            <h2>Prenez soin de vous en toute sérénité 💕</h2>
+            <p>
+                Bienvenue sur votre compagnon bien-être ! Suivez votre cycle menstruel de manière simple et intuitive. 
+                Notre outil vous aide à mieux comprendre votre corps, à anticiper vos périodes d'ovulation et à vivre 
+                chaque phase de votre cycle avec confiance et sérénité. Ensemble, prenons soin de votre santé féminine.
+            </p>
+        </div>
+        
+        <!-- Feature section -->
+        <div class="feature-section">
+            <div class="row g-4">
+                <div class="col-lg-6">
+                    <div class="feature-card">
+                        <div class="feature-img">
+                            <img src="img.png" alt="" srcset="">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="feature-description">
+                        <h3>Un suivi personnalisé pour vous</h3>
+                        <p>
+                            Notre application calcule automatiquement votre période d'ovulation et vous alerte 
+                            sur les dates importantes de votre cycle. Avec des notifications douces et des 
+                            conseils adaptés, vous restez informée et en contrôle de votre santé reproductive. 
+                            Profitez d'une expérience conçue avec amour pour votre bien-être.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="input-section">
+            <label for="cycleEndDate">
+                <i class="bi bi-calendar-heart me-2"></i>
+                Entrez la date de fin de votre cycle menstruel
+            </label>
+            <input type="date" class="form-control mb-3" id="cycleEndDate" required>
+            
+            <div class="text-center mt-4">
+                <button class="btn btn-validate" onclick="calculateCycle()">
+                    <span style="position: relative; z-index: 1;">
+                        <i class="bi bi-heart-fill me-2"></i>
+                        Valider
+                    </span>
+                </button>
+            </div>
+        </div>
+        
+        <div class="modal fade" id="resultModal" tabindex="-1" aria-labelledby="resultModalLabel" aria-hidden="true" data-bs-backdrop="false">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content result-modal-content">
+                    <div class="modal-header border-0">
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="alert-box">
+                            <i class="bi bi-exclamation-triangle-fill"></i>
+                            <div class="alert-text">
+                                Attention : Période d'ovulation
+                            </div>
+                        </div>
+                        
+                        <div class="info-box">
+                            <h4><i class="bi bi-calendar-check me-2"></i>Date de fin de cycle</h4>
+                            <p id="displayEndDate">--</p>
+                        </div>
+                        
+                        <div class="period-dates">
+                            <h4><i class="bi bi-flower1 me-2"></i>Période d'ovulation (5 jours)</h4>
+                            <div class="dates" id="ovulationDates">
+                                -- au --
+                            </div>
+                        </div>
+                        
+                        <button class="btn btn-advice" onclick="showAdvice()">
+                            <i class="bi bi-chat-heart-fill me-2"></i>
+                            Recevoir des conseils
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        function calculateCycle() {
+            const dateInput = document.getElementById('cycleEndDate');
+            const endDate = new Date(dateInput.value);
+            
+            if (!dateInput.value) {
+                alert('Veuillez entrer une date valide😊💕');
+                return;
+            }
+            
+            const ovulationStart = new Date(endDate);
+            ovulationStart.setDate(ovulationStart.getDate() + 12); 
+            
+            const ovulationEnd = new Date(ovulationStart);
+            ovulationEnd.setDate(ovulationEnd.getDate() + 4); 
+            
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            const endDateStr = endDate.toLocaleDateString('fr-FR', options);
+            const ovulationStartStr = ovulationStart.toLocaleDateString('fr-FR', options);
+            const ovulationEndStr = ovulationEnd.toLocaleDateString('fr-FR', options);
+            
+            document.getElementById('displayEndDate').textContent = endDateStr;
+            document.getElementById('ovulationDates').textContent = 
+                `Du ${ovulationStartStr} au ${ovulationEndStr}`;
+            
+            alert('✨ Votre Calendrier Personnel ✨');
+            
+            const modal = new bootstrap.Modal(document.getElementById('resultModal'));
+            modal.show();
+        }
+        
+        function showAdvice() {
+            const adviceMessages = [
+                "💕 Hydratez-vous bien pendant cette période !",
+                "🌸 Reposez-vous suffisamment et écoutez votre corps",
+                "🥗 Privilégiez une alimentation équilibrée et riche en nutriments",
+                "💆‍♀️ Prenez du temps pour vous relaxer et gérer le stress",
+                "🚶‍♀️ Une activité physique modérée peut vous aider",
+                "📝 Tenez un journal de vos symptômes pour mieux vous connaître"
+            ];
+            
+            const randomAdvice = adviceMessages[Math.floor(Math.random() * adviceMessages.length)];
+            
+            alert(randomAdvice);
+        }
+        
+        // Set max date to today
+        document.getElementById('cycleEndDate').max = new Date().toISOString().split('T')[0];
+    </script>
+</body>
+</html>
